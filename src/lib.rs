@@ -64,7 +64,7 @@ pub fn get_websockets_token(api_secret: &str, api_key: &str) -> Result<String, S
 
     let body = reqwest::Client::new()
         .post(format!("{}{}", HOST, PATH).as_str())
-        .header("User-Agent", "kraken-websockets-token.rs v0.1.9")
+        .header("User-Agent", "kraken-websockets-token.rs v0.2.1")
         .header("API-Key", api_key)
         .header("API-Sign", hmac)
         .body(content)
