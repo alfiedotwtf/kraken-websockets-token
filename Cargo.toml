@@ -13,11 +13,7 @@ edition       = "2018"
 
 [dependencies]
 base64     = "0.11.0"
-die        = "0.2.0"
 hmac       = "0.7.1"
-logfast    = "0.1.2"
 reqwest    = "0.9.24"
-serde      = "1.0.104"
 serde_json = "1.0.45"
 sha2       = "0.8.0"
-ws         = { version = "0.9.1", features = ["ssl"] }

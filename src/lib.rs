@@ -17,19 +17,9 @@
 //! }
 //! ```
 
-extern crate base64;
-extern crate die;
-extern crate hmac;
-extern crate reqwest;
-extern crate sha2;
-extern crate ws;
-
-use base64::decode;
-use hmac::{Hmac, Mac};
-use reqwest::header::USER_AGENT;
-use serde_json::Value;
-use sha2::{Digest, Sha256, Sha512};
-use std::time::{SystemTime, UNIX_EPOCH};
+use hmac::Mac;
+use sha2::Digest;
+use std::time::UNIX_EPOCH;
 
 const HOST: &str = "https://api.kraken.com";
 const PATH: &str = "/0/private/GetWebSocketsToken";
@@ -48,7 +38,7 @@ const PATH: &str = "/0/private/GetWebSocketsToken";
 /// get_websockets_token(api_secret, api_key) {
 /// ```
 pub fn get_websockets_token(api_secret: &str, api_key: &str) -> Result<String, String> {
-    let nonce = SystemTime::now()
+    let nonce = std::time::SystemTime::now()
         .duration_since(UNIX_EPOCH)
         .map_err(|err| format!("Error calculating nonce ({})", err))?
         .as_millis();
@@ -56,15 +46,15 @@ pub fn get_websockets_token(api_secret: &str, api_key: &str) -> Result<String, S
     let content = format!("nonce={}", nonce);
 
     let hmac = {
-        let secret =
-            decode(api_secret).map_err(|err| format!("Error decoding the API secret ({})", err))?;
+        let secret = base64::decode(api_secret)
+            .map_err(|err| format!("Error decoding the API secret ({})", err))?;
 
-        let mut hmacer = Hmac::<Sha512>::new_varkey(&secret)
+        let mut hmacer = hmac::Hmac::<sha2::Sha512>::new_varkey(&secret)
             .map_err(|err| format!("Error creating the HMAC ({})", err))?;
 
         hmacer.input(&PATH.as_bytes().to_vec());
         hmacer.input(
-            Sha256::digest(format!("{}{}", nonce, content).as_bytes())
+            sha2::Sha256::digest(format!("{}{}", nonce, content).as_bytes())
                 .to_vec()
                 .as_ref(),
         );
@@ -74,7 +64,7 @@ pub fn get_websockets_token(api_secret: &str, api_key: &str) -> Result<String, S
 
     let body = reqwest::Client::new()
         .post(format!("{}{}", HOST, PATH).as_str())
-        .header(USER_AGENT, "kraken-websockets-token.rs v0.1.8")
+        .header("User-Agent", "kraken-websockets-token.rs v0.1.9")
         .header("API-Key", api_key)
         .header("API-Sign", hmac)
         .body(content)
@@ -83,7 +73,7 @@ pub fn get_websockets_token(api_secret: &str, api_key: &str) -> Result<String, S
         .text()
         .map_err(|err| format!("Error getting the token response ({})", err))?;
 
-    let token = serde_json::from_str::<Value>(&body)
+    let token = serde_json::from_str::<serde_json::Value>(&body)
         .map_err(|err| format!("Token response was an error ({})", err))?
         .get("result")
         .ok_or_else(|| "Missing 'result' key from token response")?
