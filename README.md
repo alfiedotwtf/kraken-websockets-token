@@ -24,7 +24,7 @@ This crate provides a convenient way to get Kraken WebSockets API tokens.
 
 Please report any bugs or feature requests at:
 
-* [https://gitlab.com/alfiedotwtf/kraken-websockets-token/issues](https://gitlab.com/alfiedotwtf/kraken-websockets-token/issues)
+* [https://github.com/alfiedotwtf/kraken-websockets-token/issues](https://github.com/alfiedotwtf/kraken-websockets-token/issues)
 
 Feel free to fork the repository and submit pull requests :)
 
@@ -44,7 +44,7 @@ IT COMES WITHOUT WARRANTY OF ANY KIND.
 
 # COPYRIGHT AND LICENSE
 
-Perpetual Copyright (C) by Alfie John
+Copyright (C) 2021 by Alfie John
 
 Contact me if you would like this licensed under something other than the GPL
 

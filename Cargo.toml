@@ -1,12 +1,12 @@
 [package]
 name        = "kraken-websockets-token"
-version     = "0.2.1"
+version     = "0.2.2"
 description = "Convenience crate to get Kraken WebSockets API tokens"
 authors     = ["Alfie John <alfie@alfie.wtf>"]
 
 documentation = "http://docs.rs/kraken-websockets-token/"
 homepage      = "https://crates.io/crates/kraken-websockets-token"
-repository    = "https://gitlab.com/alfiedotwtf/kraken-websockets-token"
+repository    = "https://github.com/alfiedotwtf/kraken-websockets-token"
 readme        = "README.md"
 license       = "GPL-3.0-or-later"
 edition       = "2018"
