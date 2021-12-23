@@ -76,11 +76,11 @@ pub fn get_websockets_token(api_secret: &str, api_key: &str) -> Result<String, S
     let token = serde_json::from_str::<serde_json::Value>(&body)
         .map_err(|err| format!("Token response was an error ({})", err))?
         .get("result")
-        .ok_or_else(|| "Missing 'result' key from token response")?
+        .ok_or("Missing 'result' key from token response")?
         .get("token")
-        .ok_or_else(|| "Missing 'token' key from token response")?
+        .ok_or("Missing 'token' key from token response")?
         .as_str()
-        .ok_or_else(|| "Error reading token response")?
+        .ok_or("Error reading token response")?
         .to_string();
 
     Ok(token)
