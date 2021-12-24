@@ -1,6 +1,6 @@
 [package]
 name        = "kraken-websockets-token"
-version     = "1.2.3"
+version     = "1.2.4"
 description = "Convenience crate to get Kraken WebSockets API tokens"
 authors     = ["Alfie John <alfie@alfie.wtf>"]
 
@@ -12,8 +12,8 @@ license       = "GPL-3.0-or-later"
 edition       = "2018"
 
 [dependencies]
-base64     = "0.11.0"
-hmac       = "0.7.1"
-reqwest    = "0.9.24"
-serde_json = "1.0.45"
-sha2       = "0.8.0"
+base64     = "=0.13.0"
+hmac       = "=0.7.1"
+reqwest    = "=0.9.24"
+serde_json = "=1.0.73"
+sha2       = "=0.8.0"
