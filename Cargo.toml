@@ -1,6 +1,6 @@
 [package]
 name        = "kraken-websockets-token"
-version     = "1.2.6"
+version     = "1.2.7"
 description = "Convenience crate to get Kraken WebSockets API tokens"
 authors     = ["Alfie John <alfie@alfie.wtf>"]
 
